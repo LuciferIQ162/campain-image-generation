@@ -54,7 +54,10 @@ def resize_image(
     if isinstance(size, int):
         # Single dimension provided - calculate other dimension
         if maintain_aspect:
-            ratio = size / max(image.size)
+            max_dim = max(image.size)
+            if max_dim == 0:
+                raise ValueError("Invalid image dimensions: width and height cannot be zero")
+            ratio = size / max_dim
             new_size = tuple(int(dim * ratio) for dim in image.size)
         else:
             new_size = (size, size)

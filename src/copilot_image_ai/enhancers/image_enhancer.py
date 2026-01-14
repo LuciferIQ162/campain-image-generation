@@ -12,6 +12,13 @@ import cv2
 from ..config import Config
 
 
+# Enhancement constants
+DEFAULT_DENOISE_H_PARAM = 30  # H parameter for Non-Local Means denoising
+UNSHARP_MASK_RADIUS = 2  # Radius for unsharp mask filter
+UNSHARP_MASK_PERCENT_BASE = 150  # Base percent for unsharp mask
+UNSHARP_MASK_THRESHOLD = 3  # Threshold for unsharp mask
+
+
 class ImageEnhancer:
     """
     AI-powered image enhancer with various enhancement capabilities
@@ -130,7 +137,7 @@ class ImageEnhancer:
         img_array = np.array(image)
         
         # Convert strength (0-1) to h parameter
-        h = int(strength * 30)
+        h = int(strength * DEFAULT_DENOISE_H_PARAM)
         
         # Apply Non-Local Means denoising
         denoised = cv2.fastNlMeansDenoisingColored(img_array, None, h, h, 7, 21)
@@ -143,7 +150,13 @@ class ImageEnhancer:
             return image
         
         # Apply unsharp mask
-        sharpened = image.filter(ImageFilter.UnsharpMask(radius=2, percent=int(amount * 150), threshold=3))
+        sharpened = image.filter(
+            ImageFilter.UnsharpMask(
+                radius=UNSHARP_MASK_RADIUS,
+                percent=int(amount * UNSHARP_MASK_PERCENT_BASE),
+                threshold=UNSHARP_MASK_THRESHOLD
+            )
+        )
         
         return sharpened
     
