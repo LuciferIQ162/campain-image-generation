@@ -1,0 +1,17 @@
+{
+  "name": "tech_startup_logo",
+  "description": "Modern tech startup logo design",
+  "prompt": "modern tech startup logo, {company_name}, {industry}, minimalist design, professional, {color_scheme} colors, vector style, clean",
+  "negative_prompt": "complex, cluttered, amateur, low quality",
+  "style": "graphic_design",
+  "parameters": {
+    "guidance_scale": 8.0,
+    "num_inference_steps": 60
+  },
+  "tags": [
+    "logo",
+    "branding",
+    "startup",
+    "tech"
+  ]
+}
